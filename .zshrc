@@ -2,12 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/dongxu/.oh-my-zsh
+  export ZSH=/home/dongxu/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="philips"
+ZSH_THEME="pmcgee"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,22 +55,13 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-function set_proxy() {
-    export http_proxy="http://localhost:8123"
-    export https_proxy="http://localhost:8123"
-}
-
-function unset_proxy {
-    unset http_proxy
-    unset https_proxy
-}
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+#export LANG=zh_CN.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -94,29 +85,40 @@ function unset_proxy {
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+#
+alias rc=rclone
+alias vim=nvim
+
+function set_proxy() {
+    export http_proxy=http://localhost:8123
+    export https_proxy=http://localhost:8123
+}
+
+function unset_proxy() {
+    unset http_proxy
+    unset https_proxy
+}
 
 export GOPATH=$HOME/gopkg
 export GOROOT=$HOME/go
 export GOBIN=$HOME/go/bin
+
 export PATH=$PATH:$GOBIN
-
-# for coreutils
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
-
-# for rust
-export PATH=$PATH:/Users/dongxu/.cargo/bin
-
-. /usr/local/etc/profile.d/z.sh
-
-export EDITOR=vim
-
-source <(kubectl completion zsh)
-
-export GO15VENDOREXPERIMENT="1"
-export CGO_ENABLED="1"
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
+. $HOME/z.sh
+alias slackterm=slackadaisical
+
+alias pstnow='TZ="America/Los_Angeles" date'
+alias pst='TZ="America/Los_Angeles" date'
+
+export FZF_DEFAULT_OPTS="--cycle --inline-info --no-height"
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+
 t() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
     tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
+
+
+alias xclip='xclip -selection c'
