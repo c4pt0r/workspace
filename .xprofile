@@ -1,0 +1,3 @@
+setxkbmap us -option ctrl:nocaps
+fcitx-autostart
+dropbox
