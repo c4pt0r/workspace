@@ -122,3 +122,35 @@ t() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transf
 
 
 alias xclip='xclip -selection c'
+
+
+# piknik
+# pko <content> : copy <content> to the clipboard
+pko() {
+    echo "$*" | piknik -copy
+}
+
+# pkf <file> : copy the content of <file> to the clipboard
+pkf() {
+    piknik -copy < $1
+}
+
+# pkc : read the content to copy to the clipboard from STDIN
+alias pc='piknik -copy'
+
+# pkp : paste the clipboard content
+alias pp='piknik -paste'
+
+# pkm : move the clipboard content
+alias pm='piknik -move'
+
+# pkz : delete the clipboard content
+alias pz='piknik -copy < /dev/null'
+
+# pkfr [<dir>] : send a whole directory to the clipboard, as a tar archive
+pcr() {
+    tar czpvf - ${1:-.} | piknik -copy
+}
+
+# pkpr : extract clipboard content sent using the pkfr command
+alias ppr='piknik -paste | tar xzhpvf -'
