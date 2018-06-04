@@ -154,3 +154,5 @@ pcr() {
 
 # pkpr : extract clipboard content sent using the pkfr command
 alias ppr='piknik -paste | tar xzhpvf -'
+
+s() { rsync -avh --delete -e 'ssh -i ~/.ssh/id_rsa.dongxu' $HOME/sync dongxu@$1:/home/dongxu/backup; }

@@ -8,27 +8,27 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-gaps inner 10
+gaps inner 5
 gaps outer 0
 smart_borders on
 new_window pixel 5
 
 # Various Services
-# exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.jpg
+exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.jpg
 exec --no-startup-id nm-applet
-exec --no-startup-id ibus restart || ibus-daemon -d
+# exec --no-startup-id ibus restart || ibus-daemon -d
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Fira Code Retina 10
+font pango:Fira Code Retina 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 # start a terminal
 bindsym $mod+Return exec terminator
+bindsym $mod+Shift+Return exec firefox
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -149,8 +149,9 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 bindsym XF86KbdBrightnessUp exec --no-startup-id kbdlight up 10
 bindsym XF86KbdBrightnessDown exec --no-startup-id kbdlight down 10
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2dB+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2dB-
+
+#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2dB+
+#bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2dB-
 
 # class                 border  bground text    indicator child_border
 client.focused          #000000 #BB7041 #FFFFFF #BB7041   #BB7041
@@ -178,21 +179,48 @@ bar {
 	}
 }
 
-## Manual management of external displays
-# Set the shortcuts and what they do
-set $mode_display Ext Screen (v) DP ON, (h) HDMI ON, (x) DP OFF, (y) HDMI OFF
-mode "$mode_display" {
-    bindsym v exec --no-startup-id xrandr --output DP-2 --auto --right-of LVDS1, mode "default"
-    bindsym h exec --no-startup-id xrandr --output HDMI-1 --auto --right-of LVDS1, mode "default"
-    bindsym x exec --no-startup-id xrandr --output DP-2 --auto --off, mode "default"
-    bindsym y exec --no-startup-id xrandr --output HDMI-1 --auto --off, mode "default"
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+
+# display 
+set $displayMode "Set display mode [l]aptop, [1] dp-only, [2] dp & laptop, [3] mirror"
+bindsym $mod+x mode $displayMode
+mode $displayMode {
+
+    bindsym l exec --no-startup-id ~/.config/i3/laptop.sh, mode "default"
+    bindsym 1 exec --no-startup-id ~/.config/i3/dp-only.sh, mode "default"
+    bindsym 2 exec --no-startup-id ~/.config/i3/dp-extend.sh, mode "default"
+    bindsym 3 exec --no-startup-id ~/.config/i3/mirror.sh, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# power management
+# set $Locker i3lock && sleep 1
+set $Locker i3lock && sleep 1
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-# Declare here the shortcut to bring the display selection menu
-bindsym $mod+x mode "$mode_display"
 
-bindsym Mod1+Tab workspace next
-bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Delete mode "$mode_system"
+
+# screenshot selection
+bindsym --release Shift+Print exec --no-startup-id scrot -s
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+
