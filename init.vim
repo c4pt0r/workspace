@@ -11,7 +11,6 @@ Plugin 'majutsushi/tagbar'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'ryanss/vim-hackernews'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'dracula/vim'
 Plugin 'tmhedberg/matchit'
@@ -21,9 +20,10 @@ Plugin 'racer-rust/vim-racer'
 Plugin 'mrtazz/simplenote.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'csliu/a.vim'
-Plugin 'Shougo/deoplete.nvim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'zchee/deoplete-clang'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -40,7 +40,7 @@ set cmdheight=1
 
 " SuperTab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-"let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabRetainCompletionType=2
 
 " go-vim
@@ -82,7 +82,6 @@ set tabstop=4       " tab width
 set softtabstop=4   " backspace
 set shiftwidth=4    " indent width
 set expandtab       " expand tab to space
-set textwidth=79
 
 let mapleader=","
 syntax on
@@ -187,4 +186,12 @@ au FileType rust nmap <C-]> <Plug>(rust-def)
 
 "" reveal find in tree
 nmap ,n :NERDTreeFind<CR>
+
+" enable ncm2 for all buffers
+autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2
+
 let g:deoplete#enable_at_startup = 1
+
+let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang'
+
