@@ -23,6 +23,7 @@ Plugin 'csliu/a.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Shougo/deoplete.nvim'
+Plugin 'jsfaint/gen_tags.vim'
 Plugin 'zchee/deoplete-clang'
 
 call vundle#end()            " required
