@@ -8,10 +8,10 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-gaps inner 5
-gaps outer 0
-smart_borders on
-new_window pixel 5
+# gaps inner 4
+# gaps outer 0
+# smart_borders on
+new_window pixel 3
 
 # Various Services
 exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.jpg
@@ -28,7 +28,7 @@ font pango:Fira Code Retina 11
 floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec terminator
-bindsym $mod+Shift+Return exec firefox
+bindsym $mod+Shift+Return exec chromium-browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -179,7 +179,8 @@ bar {
 	}
 }
 
-bindsym Mod1+Tab workspace next
+bindsym Mod1+Tab exec rofi -show window
+#bindsym Mod1+Tab workspace back_and_forth
 bindsym Mod1+Shift+Tab workspace prev
 
 # display 
@@ -222,5 +223,9 @@ bindsym --release Shift+Print exec --no-startup-id scrot -s
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# lock
+exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
+bindsym ctrl+$mod+l exec --no-startup-id sleep 1 && xset dpms force suspend
 
 
