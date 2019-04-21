@@ -146,7 +146,7 @@ nmap <F8> :TagbarToggle<CR>
 syntax enable
 set termguicolors
 set background=dark
-colorscheme blues
+colorscheme termschool 
 
 if has("gui_running")
     set go=aAce  " remove toolbar
