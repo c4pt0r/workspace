@@ -25,6 +25,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'jsfaint/gen_tags.vim'
 Plugin 'zchee/deoplete-clang'
+Plugin 'neoclide/coc.nvim' 
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -146,13 +147,14 @@ nmap <F8> :TagbarToggle<CR>
 syntax enable
 set termguicolors
 set background=dark
-colorscheme nord 
+colorscheme deepsea
+" colorscheme borland
+set showtabline=1
 
 if has("gui_running")
     set go=aAce  " remove toolbar
     " set guifont=Hack:h16
     set guifont=Hasklig:h12
-    set showtabline=1
     set lines=999 columns=999
     "set cursorcolumn
     set guioptions=e  " instead of clearing this, set it to only `e`
@@ -193,6 +195,10 @@ autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2
 
 let g:deoplete#enable_at_startup = 1
 
-let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang'
+let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang'
 
+au BufRead,BufNewFile *.vue set filetype=html
+
+"This unsets the "last search pattern" register by hitting return
+nnoremap <CR> :noh<CR><CR>
