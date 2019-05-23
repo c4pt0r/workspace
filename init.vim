@@ -147,6 +147,7 @@ nmap <F8> :TagbarToggle<CR>
 syntax enable
 set termguicolors
 set background=dark
+
 colorscheme deepsea
 " colorscheme borland
 set showtabline=1
@@ -178,7 +179,7 @@ vmap <C-x> :!pbcopy<CR>
 vmap <C-c> :w !pbcopy<CR><CR> 
 
 set hidden
-let g:racer_cmd = "/Users/dongxu/.cargo/bin/racer"
+let g:racer_cmd = "/home/dongxu/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 
 au FileType rust nmap gd <Plug>(rust-def)
