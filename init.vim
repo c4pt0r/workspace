@@ -13,7 +13,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'dracula/vim'
-Plugin 'tmhedberg/matchit'
 Plugin 'godlygeek/tabular'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
@@ -22,28 +21,16 @@ Plugin 'mileszs/ack.vim'
 Plugin 'csliu/a.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'Shougo/deoplete.nvim'
 Plugin 'jsfaint/gen_tags.vim'
-Plugin 'zchee/deoplete-clang'
-Plugin 'neoclide/coc.nvim' 
+Plugin 'mdempsky/gocode', {'rtp': 'nvim/'}
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-let g:neocomplete#enable_at_startup = 1
-let g:echodoc_enable_at_startup = 1
-
-filetype plugin indent on
-
-set completeopt+=menuone
-set completeopt-=preview
-
 set cmdheight=1
 
-" SuperTab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabRetainCompletionType=2
+set completeopt=longest,menuone
 
 " go-vim
 let g:go_fmt_command = "goimports"
@@ -52,6 +39,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+nmap <F1> :GoDoc<CR>
 
 " search
 set incsearch
@@ -147,7 +135,6 @@ nmap <F8> :TagbarToggle<CR>
 syntax enable
 set termguicolors
 set background=dark
-
 colorscheme deepsea
 " colorscheme borland
 set showtabline=1
@@ -179,7 +166,7 @@ vmap <C-x> :!pbcopy<CR>
 vmap <C-c> :w !pbcopy<CR><CR> 
 
 set hidden
-let g:racer_cmd = "/home/dongxu/.cargo/bin/racer"
+let g:racer_cmd = "/Users/dongxu/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 
 au FileType rust nmap gd <Plug>(rust-def)
@@ -193,11 +180,6 @@ nmap ,n :NERDTreeFind<CR>
 
 " enable ncm2 for all buffers
 autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2
-
-let g:deoplete#enable_at_startup = 1
-
-let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang'
 
 au BufRead,BufNewFile *.vue set filetype=html
 
