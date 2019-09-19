@@ -89,14 +89,18 @@ export LANG=en_US.UTF-8
 alias rc=rclone
 alias vim=nvim
 
-function set_proxy() {
-    export http_proxy=http://localhost:8123
-    export https_proxy=http://localhost:8123
+set_proxy () {
+  export ALL_PROXY="socks5://127.0.0.1:1080"
+  export all_proxy="socks5://127.0.0.1:1080"
+  echo -e "Acquire::http::Proxy \"http://127.0.0.1:1090\";" | sudo tee -a /etc/apt/apt.conf > /dev/null
+  echo -e "Acquire::https::Proxy \"http://127.0.0.1:1090\";" | sudo tee -a /etc/apt/apt.conf > /dev/null
 }
 
-function unset_proxy() {
-    unset http_proxy
-    unset https_proxy
+unset_proxy () {
+  unset ALL_PROXY
+  unset all_proxy
+  sudo sed -i -e '/Acquire::http::Proxy/d' /etc/apt/apt.conf
+  sudo sed -i -e '/Acquire::https::Proxy/d' /etc/apt/apt.conf
 }
 
 export GOPATH=$HOME/gopkg
