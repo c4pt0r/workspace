@@ -132,17 +132,20 @@ nnoremap <c-l> <c-w>l
 
 nmap <F8> :TagbarToggle<CR>
 
+nmap <F10> :colorscheme github<CR>
+
 syntax enable
 set termguicolors
 set background=dark
-colorscheme deepsea
+colorscheme deep-space
 " colorscheme borland
 set showtabline=1
 
+set guifont=Hack:h13
+
 if has("gui_running")
     set go=aAce  " remove toolbar
-    " set guifont=Hack:h16
-    set guifont=Hasklig:h12
+    " set guifont=Hasklig:h12
     set lines=999 columns=999
     "set cursorcolumn
     set guioptions=e  " instead of clearing this, set it to only `e`
@@ -177,6 +180,7 @@ au FileType rust nmap <C-]> <Plug>(rust-def)
 
 "" reveal find in tree
 nmap ,n :NERDTreeFind<CR>
+nmap <F7> :NERDTreeFind<CR>
 
 " enable ncm2 for all buffers
 autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2
