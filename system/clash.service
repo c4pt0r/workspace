@@ -1,0 +1,12 @@
+[Unit]
+Description=clash service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/clash -f /etc/clash/clash.yaml
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
