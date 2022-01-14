@@ -8,40 +8,42 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-# gaps inner 4
-# gaps outer 0
-# smart_borders on
-new_window pixel 3
+gaps inner 2
+gaps outer 1
+smart_borders on
+new_window pixel 2
 
 # Various Services
 exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.jpg
 exec --no-startup-id nm-applet
+# swap ctrl caplock
+exec --no-startup-id setxkbmap -option ctrl:swapcaps
+
 # exec --no-startup-id ibus restart || ibus-daemon -d
 
 set $mod Mod4
-
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Fira Code Retina 11
+font pango: Hack Regular 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec terminator
-bindsym $mod+Shift+Return exec chromium-browser
+bindsym $mod+Shift+Return exec google-chrome-stable
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run -nf '#FFFFFF'  -nb '#222222' -sb '#BB7041' -sf '#EEEEEE' -fn 'Fira Code Retina-11' -p '$'
+bindsym $mod+p exec dmenu_run -nf '#FFFFFF'  -nb '#222222' -sb '#BB7041' -sf '#EEEEEE' -fn 'Hack 10' -p '$'
 
 # change focus
 # bindsym $mod+h focus left
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -62,7 +64,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -150,9 +152,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 bindsym XF86KbdBrightnessUp exec --no-startup-id kbdlight up 10
 bindsym XF86KbdBrightnessDown exec --no-startup-id kbdlight down 10
 
-#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2dB+
-#bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2dB-
-
 # class                 border  bground text    indicator child_border
 client.focused          #000000 #BB7041 #FFFFFF #BB7041   #BB7041
 client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
@@ -226,6 +225,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 
 # lock
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
-bindsym ctrl+$mod+l exec --no-startup-id sleep 1 && xset dpms force suspend
+bindsym ctrl+$mod+l exec --no-startup-id i3lock && xset dpms force suspend
 
+# fcitx
+exec --no-startup-id fcitx -d
 

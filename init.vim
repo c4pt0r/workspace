@@ -5,7 +5,6 @@ call vundle#begin()
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go'
-#Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'flazz/vim-colorschemes'
@@ -29,9 +28,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 set cmdheight=1
-
-#let g:SuperTabDefaultCompletionType = "context"
-#set completeopt=longest,menuone
 
 " go-vim
 let g:go_fmt_command = "goimports"
@@ -119,6 +115,7 @@ let g:tagbar_type_go = {
 \ }
 
 autocmd vimenter * NERDTree
+autocmd vimenter * TagbarToggle
 autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -138,8 +135,8 @@ nmap <F10> :colorscheme github<CR>
 syntax enable
 set termguicolors
 set background=dark
-colorscheme Atelier_ForestDark
-" colorscheme borland
+" colorscheme Atelier_ForestDark
+colorscheme spacegray
 set showtabline=1
 
 set guifont=Hack:h13
@@ -258,3 +255,9 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+
+if exists('g:vscode')
+    " VSCode extension
+else
+    " ordinary neovim
+endif
