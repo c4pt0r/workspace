@@ -21,6 +21,7 @@ Plugin 'csliu/a.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jsfaint/gen_tags.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'mdempsky/gocode', {'rtp': 'nvim/'}
 Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
