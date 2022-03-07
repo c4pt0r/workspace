@@ -14,7 +14,7 @@ smart_borders on
 new_window pixel 2
 
 # Various Services
-exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.jpg
+exec --no-startup-id feh --bg-scale ~/.config/i3/desktop-arch.png
 exec --no-startup-id nm-applet
 # swap ctrl caplock
 exec --no-startup-id setxkbmap -option ctrl:swapcaps
@@ -229,4 +229,6 @@ bindsym ctrl+$mod+l exec --no-startup-id i3lock && xset dpms force suspend
 
 # fcitx
 exec --no-startup-id fcitx -d
+
+bindsym --release Print exec ~/.config/i3/scrot.sh
 
