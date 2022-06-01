@@ -30,7 +30,7 @@ font pango: Hack Regular 10
 floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec terminator
-bindsym $mod+Shift+Return exec google-chrome-stable
+bindsym $mod+Shift+Return exec firefox
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -104,7 +104,7 @@ bindsym $mod+0 workspace 10
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
+#bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -217,7 +217,6 @@ mode "$mode_system" {
 bindsym $mod+Delete mode "$mode_system"
 
 # screenshot selection
-bindsym --release Shift+Print exec --no-startup-id scrot -s
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
@@ -230,5 +229,5 @@ bindsym ctrl+$mod+l exec --no-startup-id i3lock && xset dpms force suspend
 # fcitx
 exec --no-startup-id fcitx -d
 
-bindsym --release Print exec ~/.config/i3/scrot.sh
-
+# bindsym --release ctrl+$mod+e exec ~/.config/i3/scrot.sh
+bindsym --release $mod+Shift+3 exec --no-startup-id ~/.config/i3/scrot.sh
