@@ -25,6 +25,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'mdempsky/gocode', {'rtp': 'nvim/'}
 Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
+Plugin 'HerringtonDarkholme/yats.vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -137,7 +139,7 @@ syntax enable
 set termguicolors
 set background=dark
 " colorscheme Atelier_ForestDark
-colorscheme spacegray
+colorscheme iceberg
 set showtabline=1
 
 set guifont=Hack:h13
@@ -262,3 +264,6 @@ if exists('g:vscode')
 else
     " ordinary neovim
 endif
+
+" let g:node_host_prog = '/usr/local/bin/node'
+"let g:loaded_node_provider = 0
