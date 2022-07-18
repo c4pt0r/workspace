@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/dongxu/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -112,14 +112,13 @@ export PATH=$PATH:$GOBIN
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 . $HOME/z.sh
-alias slackterm=slackadaisical
 
-alias pstnow='TZ="America/Los_Angeles" date'
 alias pst='TZ="America/Los_Angeles" date'
+alias beijing='TZ="Asia/Shanghai" date'
 
 export FZF_DEFAULT_OPTS="--cycle --inline-info --no-height"
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
+source $HOME/fzf/completion.zsh
+source $HOME/fzf/key-bindings.zsh
 
 t() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
     tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
@@ -128,35 +127,13 @@ t() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transf
 alias xclip='xclip -selection c'
 
 
-# piknik
-# pko <content> : copy <content> to the clipboard
-pko() {
-    echo "$*" | piknik -copy
-}
+jj() { vim $HOME/Dropbox/jj/log-`date "+%Y-%m-%d"`.md }
 
-# pkf <file> : copy the content of <file> to the clipboard
-pkf() {
-    piknik -copy < $1
-}
+export PATH=$HOME/.tiup/bin:$PATH:$HOME/Library/Python/3.8/bin
+export NVS_HOME="$HOME/.nvs"
+[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
 
-# pkc : read the content to copy to the clipboard from STDIN
-alias pc='piknik -copy'
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
-# pkp : paste the clipboard content
-alias pp='piknik -paste'
-
-# pkm : move the clipboard content
-alias pm='piknik -move'
-
-# pkz : delete the clipboard content
-alias pz='piknik -copy < /dev/null'
-
-# pkfr [<dir>] : send a whole directory to the clipboard, as a tar archive
-pcr() {
-    tar czpvf - ${1:-.} | piknik -copy
-}
-
-# pkpr : extract clipboard content sent using the pkfr command
-alias ppr='piknik -paste | tar xzhpvf -'
-
-s() { rsync -avh --delete -e 'ssh -i ~/.ssh/id_rsa.dongxu' $HOME/sync dongxu@$1:/home/dongxu/backup; }
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
