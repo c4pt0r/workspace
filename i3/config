@@ -54,7 +54,7 @@ bindsym $mod+Right focus right
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
+# bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
@@ -225,6 +225,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # lock
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 bindsym ctrl+$mod+l exec --no-startup-id i3lock && xset dpms force suspend
+bindsym shift+$mod+l exec --no-startup-id i3lock && xset dpms force suspend
 
 # fcitx
 exec --no-startup-id fcitx -d
