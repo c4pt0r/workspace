@@ -126,9 +126,6 @@ t() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transf
 
 alias xclip='xclip -selection c'
 
-
-jj() { vim $HOME/Dropbox/jj/log-`date "+%Y-%m-%d"`.md }
-
 export PATH=$HOME/.tiup/bin:$PATH:$HOME/Library/Python/3.8/bin
 export NVS_HOME="$HOME/.nvs"
 [ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
@@ -137,3 +134,22 @@ export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="/home/dongxu/.local/bin:$PATH"
+
+xclip_text() {
+    xclip -selection clipboard -o
+}
+
+xclip_img() {
+    xclip -selection clipboard -t image/png -o
+}
+
+
+get_xclip() {
+    out=$(xclip -selection clipboard -t TARGETS -o | grep "image")
+    [[ -n $out ]] && xclip_img || xclip_text
+}
+
+pf() { get_xclip | curl -X PUT --data-binary @- lucy:8100/f/clip-$(date "+%F-%H-%M-%S") }
+
+jj() { vim $HOME/Dropbox/jj/log-`date "+%Y-%m-%d"`.md }
