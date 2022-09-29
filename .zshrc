@@ -150,6 +150,9 @@ get_xclip() {
     [[ -n $out ]] && xclip_img || xclip_text
 }
 
-pf() { get_xclip | curl -X PUT --data-binary @- lucy:8100/f/clip-$(date "+%F-%H-%M-%S") }
+pf() {
+    url=$(get_xclip | curl -X PUT --data-binary @- lucy:8100/f/clip-$(date "+%F-%H-%M-%S") 2>/dev/null)
+    echo http://lucy:8100$url
+}
 
 jj() { vim $HOME/Dropbox/jj/log-`date "+%Y-%m-%d"`.md }
