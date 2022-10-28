@@ -104,8 +104,8 @@ unset_proxy () {
 }
 
 export GOPATH=$HOME/gopkg
-export GOROOT=$HOME/go
-export GOBIN=$HOME/go/bin
+export GOROOT=/usr/local/go/
+export GOBIN=/usr/local/go/bin
 
 export PATH=$PATH:$GOBIN
 
@@ -135,6 +135,7 @@ export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="/home/dongxu/.local/bin:$PATH"
+export PATH="/Users/dongxu/Library/Python/3.9/bin:$PATH"
 
 xclip_text() {
     xclip -selection clipboard -o
@@ -156,3 +157,15 @@ pf() {
 }
 
 jj() { vim $HOME/Dropbox/jj/log-`date "+%Y-%m-%d"`.md }
+
+export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+node17() {
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    nvm use 17.0
+}

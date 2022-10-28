@@ -22,6 +22,8 @@ Plugin 'arcticicestudio/nord-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jsfaint/gen_tags.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'pechorin/any-jump.vim'
+Plugin 'mattn/emmet-vim'
 Plugin 'mdempsky/gocode', {'rtp': 'nvim/'}
 Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
@@ -139,7 +141,7 @@ syntax enable
 set termguicolors
 set background=dark
 " colorscheme Atelier_ForestDark
-colorscheme iceberg
+colorscheme space-vim-dark
 set showtabline=1
 
 set guifont=Hack:h13
@@ -267,3 +269,6 @@ endif
 
 " let g:node_host_prog = '/usr/local/bin/node'
 "let g:loaded_node_provider = 0
+"
+" https://github.com/fatih/vim-go/issues/108
+autocmd FileType qf wincmd J
