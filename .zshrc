@@ -5,8 +5,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# it'll load a random theme each time that oh-my-zsh is loaded. See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="pmcgee"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -169,3 +168,8 @@ node17() {
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     nvm use 17.0
 }
+
+export PATH="$PATH:/Users/dongxu/.bin"
+
+# Created by `pipx` on 2023-05-18 21:39:03
+export PATH="$PATH:/Users/dongxu/.local/bin"

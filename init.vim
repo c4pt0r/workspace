@@ -1,12 +1,13 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required set rtp+=~/.vim/bundle/Vundle.vim call vundle#begin() 
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar' 
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
@@ -24,11 +25,12 @@ Plugin 'jsfaint/gen_tags.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'pechorin/any-jump.vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'AndrewRadev/tagalong.vim'
+Plugin 'tpope/vim-surround'
 Plugin 'mdempsky/gocode', {'rtp': 'nvim/'}
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
 Plugin 'HerringtonDarkholme/yats.vim'
-
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -141,7 +143,7 @@ syntax enable
 set termguicolors
 set background=dark
 " colorscheme Atelier_ForestDark
-colorscheme space-vim-dark
+colorscheme spacegray
 set showtabline=1
 
 set guifont=Hack:h13
@@ -272,3 +274,5 @@ endif
 "
 " https://github.com/fatih/vim-go/issues/108
 autocmd FileType qf wincmd J
+
+let g:copilot_node_command = "~/.nvm/versions/node/v17.0.1/bin/node"
