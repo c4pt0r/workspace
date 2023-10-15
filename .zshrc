@@ -173,3 +173,5 @@ export PATH="$PATH:/Users/dongxu/.bin"
 
 # Created by `pipx` on 2023-05-18 21:39:03
 export PATH="$PATH:/Users/dongxu/.local/bin"
+
+alias now="date +'%Y-%m-%d-%H-%M-%S'"
