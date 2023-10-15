@@ -8,13 +8,13 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-gaps inner 2
-gaps outer 1
-smart_borders on
-new_window pixel 2
+#gaps inner 2
+#gaps outer 1
+#smart_borders on
+new_window pixel 1
 
 # Various Services
-exec --no-startup-id feh --bg-scale ~/.config/i3/desktop-arch.png
+#exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.png
 exec --no-startup-id nm-applet
 # swap ctrl caplock
 exec --no-startup-id setxkbmap -option ctrl:swapcaps
@@ -36,7 +36,7 @@ bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run -nf '#FFFFFF'  -nb '#222222' -sb '#BB7041' -sf '#EEEEEE' -fn 'Hack 10' -p '$'
+bindsym $mod+p exec dmenu_run -nf '#FFFFFF'  -nb '#222222' -sb '#000000' -sf '#EEEEEE' -fn 'Hack 10' -p '$'
 
 # change focus
 # bindsym $mod+h focus left
@@ -104,7 +104,7 @@ bindsym $mod+0 workspace 10
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
-#bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -153,13 +153,13 @@ bindsym XF86KbdBrightnessUp exec --no-startup-id kbdlight up 10
 bindsym XF86KbdBrightnessDown exec --no-startup-id kbdlight down 10
 
 # class                 border  bground text    indicator child_border
-client.focused          #000000 #BB7041 #FFFFFF #BB7041   #BB7041
+client.focused          #000000 #e6e6e6 #FFFFFF #e6e6e6   #e6e6e6
 client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
 client.unfocused        #333333 #222222 #888888 #292D2E   #222222
 client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
-client.background       #FFFFFF
+client.background       #000000
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -218,17 +218,17 @@ bindsym $mod+Delete mode "$mode_system"
 
 # screenshot selection
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle 
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # lock
-exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
-bindsym ctrl+$mod+l exec --no-startup-id i3lock && xset dpms force suspend
-bindsym shift+$mod+l exec --no-startup-id i3lock && xset dpms force suspend
+#exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
+#bindsym --release shift+$mod+l exec --no-startup-id slock && xset dpms force suspend
 
 # fcitx
 exec --no-startup-id fcitx -d
 
 # bindsym --release ctrl+$mod+e exec ~/.config/i3/scrot.sh
-bindsym --release $mod+Shift+3 exec --no-startup-id ~/.config/i3/scrot.sh
+bindsym --release $mod+Ctrl+3 exec --no-startup-id ~/.config/i3/scrot.sh
