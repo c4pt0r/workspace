@@ -29,7 +29,7 @@
 	[iwd]# station device connect SSID
 	
 	# pacstrap
-	
+	pacman -Sy archlinux-keyring 
 	pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr dosfstools netctl vim iw wpa_supplicant networkmanager dialog
 	
 	# fstab
