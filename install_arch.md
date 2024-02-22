@@ -46,7 +46,7 @@
 		...
 	
 	locale-gen
-	echo "LANG=en_US.UTF-8 UTF-8" > /etc/locale.conf
+	echo "LANG=\"en_US.UTF-8 UTF-8\"" > /etc/locale.conf
 	
 	# timezone
 	tzselect
