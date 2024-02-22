@@ -82,10 +82,15 @@
 	exit
 	shutdown -h now
 	
-	#####################
+	########## After Reboot ###########
 	
 	systemctl start NetworkManager
 	systemctl enable NetworkManager
 	nmctl d wifi list
 	nmctl d wifi connect SSID password password
+
 	
+	useradd -m -g wheel -d /home/dongxu -s /bin/bash -m dongxu
+	passwd username
+	pacman -S sudo
+	EDITOR=vim visudo
