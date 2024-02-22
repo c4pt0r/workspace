@@ -51,7 +51,7 @@
 	# timezone
 	tzselect
 	
-	# ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+	# ln -sf /usr/share/zoneinfo/<Your-Time-Zone> /etc/localtime
 	hwclock --systohc --utc
 	
 	
