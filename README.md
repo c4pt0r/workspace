@@ -21,9 +21,7 @@ External Requirements:
     NOTE See Install Recipes for additional Windows and Linux specific notes and quick install snippets
 
 
-// lsp python
-npm i -g pyright
-
-// ripgrep 
-
-git clone https://github.com/c4pt0r/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+    // lsp python
+    npm i -g pyright
+    // ripgrep 
+    git clone https://github.com/c4pt0r/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
