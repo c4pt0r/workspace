@@ -6,7 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded. See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="pmcgee"
+ZSH_THEME="steeef"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -174,4 +174,13 @@ export PATH="$PATH:/Users/dongxu/.bin"
 # Created by `pipx` on 2023-05-18 21:39:03
 export PATH="$PATH:/Users/dongxu/.local/bin"
 
+export PATH="$PATH:/Users/dongxu/.tip/bin"
+
 alias now="date +'%Y-%m-%d-%H-%M-%S'"
+
+export PATH=/Users/dongxu/.ticloud/bin:$PATH
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/dongxu/.lmstudio/bin"
+# End of LM Studio CLI section
+
