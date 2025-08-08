@@ -335,6 +335,18 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>w', group = '[W]orkspace' },
+        { '<leader>ms', group = '[M]ini [S]urround' },
+
+        { '<leader>msa', desc = 'Add surround: sa<motion><char>' },
+        { '<leader>msd', desc = 'Delete surround: sd<char>' },
+        { '<leader>msr', desc = 'Replace surround: sr<old><new>' },
+        { '<leader>msf', desc = 'Find right surround: sf<char>' },
+        { '<leader>msF', desc = 'Find left surround: sF<char>' },
+
+        { '<leader>msex', desc = 'Example: saiw" -> "word"' },
+        { '<leader>msed', desc = "Example: sd'  -> remove quotes" },
+        { '<leader>mser', desc = 'Example: sr\'" -> \'word\' -> "word"' },
+        { '<leader>mset', desc = 'Example: sat<p> -> <p>text</p>' },
       }
       -- visual mode
       require('which-key').add {
