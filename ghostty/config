@@ -37,8 +37,6 @@ clipboard-paste-bracketed-safe = true
 # --- Shell Integration ---
 shell-integration = zsh
 
-# --- Claude 专属优化 ---
-# initial-command = /opt/homebrew/bin/claude   # 装好claude-code后再取消注释
 initial-window = true
 quit-after-last-window-closed = true
 notify-on-command-finish = always
@@ -46,6 +44,5 @@ notify-on-command-finish = always
 # --- Performance ---
 scrollback-limit = 25000000
 
-# --- 基础分屏（左右添加屏幕）---
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=toggle_split_zoom
