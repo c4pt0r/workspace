@@ -4,10 +4,10 @@ font-size = 11
 adjust-cell-height = 2
 
 # --- Theme and Colors ---
-theme = Catppuccin Mocha
+theme = Retro
 
 # --- Window and Appearance ---
-background-opacity = 0.85
+background-opacity = 1
 background-blur-radius = 30
 macos-titlebar-style = transparent
 window-padding-x = 10
@@ -45,4 +45,4 @@ notify-on-command-finish = always
 scrollback-limit = 25000000
 
 keybind = cmd+d=new_split:right
-keybind = cmd+shift+d=toggle_split_zoom
+keybind = cmd+shift+d=new_split:down
