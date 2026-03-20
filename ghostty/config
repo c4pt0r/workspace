@@ -4,7 +4,8 @@ font-size = 11
 adjust-cell-height = 2
 
 # --- Theme and Colors ---
-theme = Retro
+# theme = Retro
+theme = 0x96f
 
 # --- Window and Appearance ---
 background-opacity = 1
