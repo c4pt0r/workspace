@@ -36,7 +36,7 @@ Omarchy 的 Hyprland 配置是 Lua，用户文件在 Omarchy 默认配置之后�
 | `bindings.lua` | `SUPER+SHIFT+Q` 关窗口；`SUPER+P` 改成开 Omarchy 菜单，原本的 Pseudo window 挪到 `SUPER+SHIFT+P` |
 | `hyprland.lua` | DOSBox 窗口浮动并锁 4:3（1536x1152），否则平铺成竖条画面只剩中间一小块 |
 | `autostart.lua` | 开机起 `caffeine-tray`（托盘防休眠开关） |
-| `monitors.lua` | **本机专用**：缩放写死 `2`（默认是 `auto`）。换机器前先改回 `auto` 再 apply |
+| `monitors.lua` | **本机专用**：缩放写死 `1.6`（默认是 `auto`）。换机器前先改回 `auto` 再 apply |
 
 几个坑：
 
