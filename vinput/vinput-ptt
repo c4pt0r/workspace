@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Push-to-talk wrapper for fcitx5-vinput.
+#
+# Guards on daemon state so duplicate triggers are harmless: Hyprland fires a
+# different modmask variant for the press and the release of a modifier key, so
+# several binds point at this script.
+#
+#   $1  start | stop
+#   $2  label of the bind variant that fired (kept for diagnostics)
+LOG="$HOME/.local/state/vinput-ptt.log"
+st=$(vinput daemon status 2>/dev/null)
+printf '%s  %-5s  variant=%-14s  state=%s\n' "$(date +%T)" "$1" "$2" "${st#Daemon status: }" >>"$LOG"
+case "$1" in
+  start) [[ "$st" == *idle* ]] && vinput rec start >>"$LOG" 2>&1 ;;
+  stop)  [[ "$st" != *idle* ]] && vinput rec stop --scene translate >>"$LOG" 2>&1 ;;
+esac
+exit 0

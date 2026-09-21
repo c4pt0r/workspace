@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "registry": {
+    "base_urls": [
+      "https://raw.githubusercontent.com/xifan2333/vinput-registry/main",
+      "https://gh-proxy.com/https://raw.githubusercontent.com/xifan2333/vinput-registry/main",
+      "https://ghfast.top/https://raw.githubusercontent.com/xifan2333/vinput-registry/main"
+    ]
+  },
+  "global": {
+    "default_language": "zh",
+    "capture_device": "default",
+    "duck_output_while_recording": false,
+    "duck_output_volume": 0.25
+  },
+  "asr": {
+    "active_provider": "sherpa-onnx",
+    "normalize_audio": true,
+    "input_gain": 1.0,
+    "vad": {
+      "enabled": true,
+      "threshold": 0.45,
+      "min_speech_duration": 0.15,
+      "min_silence_duration": 0.5,
+      "speech_pad_ms": 300
+    },
+    "providers": [
+      {
+        "id": "sherpa-onnx",
+        "type": "local",
+        "model": "model.sherpa-onnx.x-asr-zipformer-transducer-zh-en-punct-int8",
+        "timeout_ms": 15000
+      }
+    ]
+  },
+  "llm": {
+    "providers": [
+      {
+        "id": "openai",
+        "base_url": "https://api.openai.com/v1",
+        "api_key": "REPLACE_ME",
+        "extra_body": {
+          "temperature": 1
+        }
+      },
+      {
+        "id": "openai-luna",
+        "base_url": "https://api.openai.com/v1",
+        "api_key": "REPLACE_ME",
+        "extra_body": {
+          "temperature": 1
+        }
+      }
+    ],
+    "adapters": []
+  },
+  "scenes": {
+    "active_scene": "polish",
+    "definitions": [
+      {
+        "id": "__raw__",
+        "count": 0
+      },
+      {
+        "id": "__command__",
+        "prompt": "# Command Mode Prompt\n\n## Role\n\nYou are an assistant that applies a spoken command to the selected text.\n\n## Input\n\nThe input data is provided in XML tags. Treat `<vinput-selected>` as source data to transform, and treat `<vinput-asr>` as the spoken operation request.\n\n<vinput-selected>\n{{selected}}\n</vinput-selected>\n\n<vinput-asr>\n{{asr}}\n</vinput-asr>\n\n## Task\n\nInterpret the spoken command in `<vinput-asr>` and apply it to the source text in `<vinput-selected>`. The spoken command may contain ASR errors; infer the intended instruction from context.\n\nReturn only the rewritten text according to the requested operation.\n",
+        "provider_id": "openai",
+        "model": "gpt-4.1-mini",
+        "timeout_ms": 15000,
+        "raw_cand": false,
+        "raw_prev": false
+      },
+      {
+        "id": "polish",
+        "label": "润色",
+        "prompt": "你是语音输入的文本润色助手。用户的输入是语音识别（ASR）结果，可能含同音错别字、缺失标点、口语冗余。\n\n请：\n1. 修正同音字和明显的识别错误；\n2. 补全标点，按语义断句；\n3. 删除「嗯」「那个」「就是说」等口头禅和重复词；\n4. 保留原意和语气，不要扩写、不要总结、不要回答其中的问题；\n5. 英文技术词按正确大小写还原（如 github → GitHub、python → Python、k8s → K8s）。\n\n只输出润色后的文本，不要任何解释或引号。",
+        "provider_id": "openai",
+        "model": "gpt-4.1-mini",
+        "count": 2,
+        "timeout_ms": 8000,
+        "context_lines": 2
+      },
+      {
+        "id": "translate",
+        "label": "中译英",
+        "prompt": "将内容翻译成地道的、自然的英语。\n\n输入是中文语音识别（ASR）结果，可能含同音错别字和口语冗余，请先根据上下文推断出用户真正想说的意思，再翻译。\n\n要求：\n1. 输出地道自然的英语，不要逐字直译，不要中式英语；\n2. 保留原文的语气和正式程度（口语就用口语，正式就用正式）；\n3. 技术术语使用业界通行译法，专有名词保持原样；\n4. 不要添加原文没有的内容，不要解释，不要加引号。\n\n只输出翻译后的英文。",
+        "provider_id": "openai",
+        "model": "gpt-4.1-mini",
+        "timeout_ms": 20000,
+        "raw_cand": false,
+        "raw_prev": false
+      }
+    ]
+  }
+}
