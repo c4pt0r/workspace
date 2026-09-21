@@ -28,7 +28,7 @@
       {
         "id": "sherpa-onnx",
         "type": "local",
-        "model": "model.sherpa-onnx.x-asr-zipformer-transducer-zh-en-punct-int8",
+        "model": "model.sherpa-onnx.x-asr-960ms-streaming-zipformer-transducer-zh-en-punct-int8",
         "timeout_ms": 15000
       }
     ]

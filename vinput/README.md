@@ -21,8 +21,8 @@ The Hyprland key bindings live in `../hypr/bindings.lua`.
 yay -S fcitx5-vinput-bin
 
 vinput init
-vinput model add onnx-xasr-zh-en-punct-int8-off   # 130 MB, zh+en, punctuation, hotwords
-vinput model use onnx-xasr-zh-en-punct-int8-off
+vinput model add onnx-xasr-zh-en-960ms-punct-stream   # 128 MB, zh+en, punctuation, hotwords
+vinput model use onnx-xasr-zh-en-960ms-punct-stream
 
 install -m700 -d ~/.config/vinput
 install -m600 config.json ~/.config/vinput/config.json
@@ -95,6 +95,25 @@ Binding only one variant records forever and never stops. `wtype` is no help for
 testing this -- it builds its own keymap where `Control_R` carries no modifier
 semantics, so both variants appear to match. Bind a logging wrapper instead and
 press the real key once; `vinput-ptt` writes to `~/.local/state/vinput-ptt.log`.
+
+**The offline X-ASR model crashes on audio longer than ~30 s.** The int8
+non-streaming build (`onnx-xasr-zh-en-punct-int8-off`) dies inside onnxruntime:
+
+```
+Non-zero status code returned while running Reshape node.
+Name:'/encoder/0/layers.0/self_attn_weights/Reshape_3'
+Input shape:{1,404,16}, requested shape:{-1,4807,4,4}
+-> vinput-daemon: worker exception
+```
+
+Measured by feeding fixed-length clips through a null sink: 20 s and 30 s
+transcribe fine, 40 s and 48 s crash. Nothing reaches the screen when it does,
+and there is no setting to cap or chunk the recording. The streaming sibling
+`onnx-xasr-zh-en-960ms-punct-stream` has the same family, language coverage and
+hotword support, and handled 40 s, 50 s and 204 s without complaint -- it
+consumes 960 ms blocks, so no single long tensor is ever built. That is what
+this config now uses. The offline model is more accurate on short utterances,
+so it is worth keeping installed for anyone who never dictates long-form.
 
 **`vinput scene edit` activates the scene it edits.** Check `vinput scene list`
 for the `[*]` marker after every edit.
