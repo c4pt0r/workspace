@@ -8,17 +8,36 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#gaps inner 2
-#gaps outer 1
-#smart_borders on
+gaps inner 8
+gaps outer 4
+smart_borders on
 new_window pixel 1
 
+# Fix invisible / lost modal dialogs in i3
+for_window [window_type="dialog"] floating enable, focus, move position center
+for_window [window_role="dialog"] floating enable, focus, move position center
+for_window [window_role="GtkFileChooserDialog"] floating enable
+for_window [window_role="GtkFileChooserDialog"] focus
+for_window [window_role="GtkFileChooserDialog"] move position center
+for_window [window_type="dialog"] floating enable
+for_window [window_type="dialog"] move position center
+
+for_window [window_role="GtkFileChooserDialog"] floating enable
+for_window [window_role="GtkFileChooserDialog"] move position center
+for_window [window_role="GtkFileChooserDialog"] focus
+
+
+
+
 # Various Services
-#exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.png
+exec_always --no-startup-id feh --bg-fill ~/.config/i3/wallpaper-great-wave-2560x1600.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id ~/.config/i3/auto-extend.sh
 # swap ctrl caplock
 exec --no-startup-id setxkbmap -option ctrl:swapcaps
+
+# reverse touchpad scroll direction for Apple SPI Trackpad
+exec --no-startup-id xinput set-prop 'Apple SPI Trackpad' 'libinput Natural Scrolling Enabled' 0
 
 # exec --no-startup-id ibus restart || ibus-daemon -d
 
@@ -31,13 +50,13 @@ font pango: Hack Regular 10
 floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec terminator
-bindsym $mod+Shift+Return exec firefox
+bindsym $mod+Shift+Return exec chromium-browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run -nf '#FFFFFF'  -nb '#222222' -sb '#000000' -sf '#EEEEEE' -fn 'Hack 10' -p '$'
+bindsym $mod+p exec --no-startup-id dmenu_run -nf '#FFFFFF'  -nb '#222222' -sb '#000000' -sf '#EEEEEE' -fn 'Hack 10' -p '$'
 
 # change focus
 # bindsym $mod+h focus left
@@ -148,34 +167,36 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Function keys
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
-bindsym XF86KbdBrightnessUp exec --no-startup-id kbdlight up 10
-bindsym XF86KbdBrightnessDown exec --no-startup-id kbdlight down 10
+# Screen brightness (panel: apple-panel-bl)
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl --device='apple-panel-bl' set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --device='apple-panel-bl' set 5%-
+# Keyboard backlight (leds: kbd_backlight)
+bindsym XF86KbdBrightnessUp exec --no-startup-id brightnessctl --device='kbd_backlight' set 10%+
+bindsym XF86KbdBrightnessDown exec --no-startup-id brightnessctl --device='kbd_backlight' set 10%-
 
 # class                 border  bground text    indicator child_border
-client.focused          #000000 #e6e6e6 #FFFFFF #e6e6e6   #e6e6e6
-client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
-client.unfocused        #333333 #222222 #888888 #292D2E   #222222
-client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+client.focused          #5E81AC #5E81AC #ECEFF4 #88C0D0   #5E81AC
+client.focused_inactive #434C5E #434C5E #D8DEE9 #4C566A   #434C5E
+client.unfocused        #3B4252 #3B4252 #7B88A1 #3B4252   #3B4252
+client.urgent           #BF616A #BF616A #ECEFF4 #BF616A   #BF616A
+client.placeholder      #2E3440 #2E3440 #D8DEE9 #2E3440   #2E3440
 
-client.background       #000000
+client.background       #2E3440
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     status_command i3status
 	colors {
-		background #000000
-		statusline #FFFFFF
-		separator  #666666
+		background #2E3440
+		statusline #D8DEE9
+		separator  #4C566A
 
-		focused_workspace  #BB7041 #BB7041 #FFFFFF
-		active_workspace   #333333 #222222 #FFFFFF
-		inactive_workspace #333333 #222222 #888888
-		urgent_workspace   #2F343A #900000 #FFFFFF
-		binding_mode       #2F343A #900000 #FFFFFF
+		focused_workspace  #5E81AC #5E81AC #ECEFF4
+		active_workspace   #434C5E #434C5E #D8DEE9
+		inactive_workspace #2E3440 #2E3440 #7B88A1
+		urgent_workspace   #BF616A #BF616A #ECEFF4
+		binding_mode       #BF616A #BF616A #ECEFF4
 	}
 }
 
@@ -219,17 +240,27 @@ bindsym $mod+Delete mode "$mode_system"
 
 # screenshot selection
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle 
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --release XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --release XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --release XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --release XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
 
 # lock
 #exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 #bindsym --release shift+$mod+l exec --no-startup-id slock && xset dpms force suspend
 
 # fcitx
-exec --no-startup-id fcitx -d
+exec --no-startup-id fcitx5 -d
+exec --no-startup-id setxkbmap -option ctrl:nocaps 
 
 # bindsym --release ctrl+$mod+e exec ~/.config/i3/scrot.sh
 bindsym --release $mod+Ctrl+3 exec --no-startup-id ~/.config/i3/scrot.sh
+
+
+#exec --no-startup-id env GTK_IM_MODULE=ibus QT_IM_MODULE=ibus XMODIFIERS=@im=ibus ibus-daemon -drx
+
+exec --no-startup-id xinput set-prop "Apple SPI Trackpad" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "Apple SPI Trackpad" "libinput Natural Scrolling Enabled" 0
+exec --no-startup-id xinput set-prop "Apple SPI Trackpad" "libinput Accel Speed" 0.5
+
