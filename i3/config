@@ -16,6 +16,7 @@ new_window pixel 1
 # Various Services
 #exec --no-startup-id feh --bg-scale ~/.config/i3/desktop.png
 exec --no-startup-id nm-applet
+exec --no-startup-id ~/.config/i3/auto-extend.sh
 # swap ctrl caplock
 exec --no-startup-id setxkbmap -option ctrl:swapcaps
 
